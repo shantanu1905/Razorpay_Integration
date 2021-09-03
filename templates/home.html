@@ -8,35 +8,38 @@
   .container{
       margin: auto;
 width: 60%;
-border: 3px solid #31332f;
+
 padding: 10px;
 text-align: center;
+vertical-align: center;
   }
 </style>
 <div class="container">
 
+   <br><br>
+   <img src="static/razorpay.png">
+        <br><br>
+        <form action="/success" method="POST">
+    {% csrf_token %}
+    <div class="row mb-3">
+      <label for="inputtext" class="col-sm-2 col-form-label">Name</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" name="name">
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="inputPassword3" class="col-sm-2 col-form-label">Amount</label>
+      <div class="col-sm-10">
+        <input type="number" class="form-control" name="amount">
+      </div>
+    </div>
+    
   
-  <form>
-    <div class="row mb-3">
-      <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
-      <div class="col-sm-10">
-        <input type="email" class="form-control" id="inputEmail3">
-      </div>
-    </div>
-    <div class="row mb-3">
-      <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
-      <div class="col-sm-10">
-        <input type="password" class="form-control" id="inputPassword3">
-      </div>
-    </div>
-    
-    <button type="submit" class="btn btn-primary">Sign in</button>
   </div>
   </div>
     
     
-  </form>
-    
+ 
   <br><br>
       </div>
       
@@ -44,7 +47,25 @@ text-align: center;
 </div>
 
 
- 
+
+  <script
+      src="https://checkout.razorpay.com/v1/checkout.js"
+      data-key="rzp_test_CIlOBrB23fsNUZ"
+      data-amount={{payment.amount}}
+      data-currency="INR"
+      data-order_id={{payment.id}}
+      data-buttontext="Pay with Razorpay"
+      data-name="ILoveDjango3000"
+      data-description=""
+      data-image=""
+      data-prefill.name="Shantanu Nimkar"
+      data-prefill.email="snimkar1905@gmail.com"
+      data-theme.color="#F37254"
+  ></script>
+  <input type="hidden" custom="Hidden Element" name="hidden">
+  </form>
+
+
     
     
 
