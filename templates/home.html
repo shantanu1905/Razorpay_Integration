@@ -1,73 +1,79 @@
- {% extends 'base.html' %}
- {% block content %}
+{% extends 'base.html' %}
+{% block content %}
+
+<head>
+    <style>
+        .center {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        body {background-color: rgb(255, 255, 255);}
+
+    </style>
+</head>
+
+<div class="center">
+<form class="text-center border border-light p-5"    method="POST">
+
+{% csrf_token %}
+
+    <p class="h3 mb-3">
+    <i class="fas fa-coffee"></i>DONATE US !
+    <br><br>
+        <img src="static/heart.png">
+        <br><br
+    </p>
 
 
+    <p class="mb-3">
+      It's not the amount that matters but the meaning behind your donation. .
+    </p>
+
+<input type="name" name="name" id="name" required class="form-control mb-4" placeholder="Name">
+<input type="number" name="amount" id="amount" required class="form-control mb-4" placeholder="Amount">
+<input type="email" name="email" id="email" required class="form-control mb-4" placeholder="Email">
+
+<button type="submit" value="Submit" class="btn btn-primary" > proceed</button>
 
 
-<style>
-  .container{
-      margin: auto;
-width: 60%;
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+  {{message}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{% endfor %}
+{% endif %}
 
-padding: 10px;
-text-align: center;
-vertical-align: center;
-  }
-</style>
-<div class="container">
+</form>
+<!-- RAZORPAY INTEGRATION HERE -->
 
-   <br><br>
-   <img src="static/razorpay.png">
-        <br><br>
-        <form action="/success" method="POST">
-    {% csrf_token %}
-    <div class="row mb-3">
-      <label for="inputtext" class="col-sm-2 col-form-label">Name</label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" name="name">
-      </div>
-    </div>
-    <div class="row mb-3">
-      <label for="inputPassword3" class="col-sm-2 col-form-label">Amount</label>
-      <div class="col-sm-10">
-        <input type="number" class="form-control" name="amount">
-      </div>
-    </div>
-    
-  
-  </div>
-  </div>
-    
-    
- 
-  <br><br>
-      </div>
-      
+{% if payment %}
+<form class="text-center border border-light p-5"  action="success" method="POST">
+  {% csrf_token %}
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"
+    data-key="rzp_test_CIlOBrB23fsNUZ"
+    data-amount="{{payment.amount}}"
+    data-currency="INR"
+    data-order_id="{{payment.id}}"
+    data-buttontext="Pay with Razorpay"
+    data-name="Shantanu Nimkar"
+    data-description="payments gateway"
+    data-image="static/lgo.jpg"
+    data-prefill.name="PC"
+    data-prefill.email="{{payment.email}}"
+    data-theme.color="#F37254">
+</script>
+</form>
 </div>
 </div>
 
+{% endif %}
 
-
-  <script
-      src="https://checkout.razorpay.com/v1/checkout.js"
-      data-key="rzp_test_CIlOBrB23fsNUZ"
-      data-amount={{payment.amount}}
-      data-currency="INR"
-      data-order_id={{payment.id}}
-      data-buttontext="Pay with Razorpay"
-      data-name="ILoveDjango3000"
-      data-description=""
-      data-image=""
-      data-prefill.name="Shantanu Nimkar"
-      data-prefill.email="snimkar1905@gmail.com"
-      data-theme.color="#F37254"
-  ></script>
-  <input type="hidden" custom="Hidden Element" name="hidden">
-  </form>
-
-
-    
-    
-
-{% endblock%}
-        
+{% endblock %}
