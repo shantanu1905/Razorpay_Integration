@@ -28,7 +28,7 @@ SECRET_KEY = config('secret_key')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['razorpay-djangoo.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1','razorpay-djangoo.herokuapp.com']
 
 
 # Application definition
@@ -133,6 +133,7 @@ STATICFILES_DIRS = (
 )
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+WHITENOISE_USE_FINDERS = True
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field.
 
