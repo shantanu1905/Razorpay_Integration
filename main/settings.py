@@ -36,6 +36,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -147,3 +148,4 @@ EMAIL_HOST_PASSWORD =config('email_password')
 
 
 #django_heroku.settings(locals())
+WHITENOISE_USE_FINDERS = True
