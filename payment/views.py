@@ -12,6 +12,10 @@ from django.utils.html import strip_tags
 # Create your views here.
 
 
+def index(request):
+   return render(request , "index.html")
+
+
 
 def home(request):
   if request.method == "POST":
@@ -32,7 +36,7 @@ def home(request):
     
    #email section
     subject = 'Razopay_django_Intregration@<no-reply>'
-    html_content =render_to_string("email.html",{'title':'Conformation mail',})
+    html_content =render_to_string("email.html",{'title':'Conformation mail', 'name':name , 'amount':amount , 'email':email })
     text_content =strip_tags(html_content)
 
     email=EmailMultiAlternatives(
